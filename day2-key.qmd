@@ -7,4 +7,48 @@ execute:
   message: false
 ---
 
-## 
+## Vectors 
+
+```{r}
+# Create a vector
+dogs <- c("teddy", "khora", "waffle", "banjo", "tallie")
+
+# Check the class
+class(dogs)
+```
+
+```{r}
+cats <- c("creamsicle wolf", 14.2, 3L)
+class(cats)
+# Categorized as character because vector can only be 1 type of class and it will take the most flexible class
+```
+
+```{r}
+years <- c(20, 40, 16, 2)
+class(years)
+
+# typeof function gives you higher resolution of class
+typeof(years)
+
+# to get it to return the years vector as an integer class add an L next to each number
+```
+
+```{r}
+# Want to do a conditional check
+# is. <<< asks questions "is this THIS"
+# as. <<< gives a command "make this THIS"
+
+is.numeric(years)
+is.character(years)
+```
+
+```{r}
+# Assign names to values in a vector
+dog_food <- c(teddy = "purina", khora = "alpo", waffle = "fancy feast")
+
+dog_food
+
+dog_food[2]
+
+dog_food["khora"]
+```
