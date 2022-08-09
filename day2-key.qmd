@@ -7,7 +7,11 @@ execute:
   message: false
 ---
 
-## Vectors 
+```{r}
+library(tidyverse)
+```
+
+## Vectors
 
 ```{r}
 # Create a vector
@@ -52,3 +56,136 @@ dog_food[2]
 
 dog_food["khora"]
 ```
+
+```{r}
+cars <- c("blue", "orange", "white")
+cars[1]
+
+i <- seq(1:2)
+cars[i]
+```
+
+```{r}
+# Assign new value based on position. Called mutability
+cars[3] <- "yellow"
+cars
+```
+
+## Matrices
+
+```{r}
+# byrow = false will make it so that it populates values by column instead of by rown
+fish_size <- matrix(c(12, 14, 18, 20),ncol = 2, nrow = 2, byrow = FALSE)
+fish_size
+
+class(fish_size)
+typeof(fish_size)
+
+# Example of indexing: 
+fish_size[1,1]
+fish_size[2,1]
+
+# What happens if we create a matrix with different types of data?
+fish_type <- matrix(c(12, "trout", 18, 13L),ncol = 2, nrow = 2, byrow = FALSE)
+
+class(fish_type)
+
+typeof(fish_type)
+
+fish_type
+
+# leaving column blank (i.e. only having the row indicator) returns all columns for second row
+fish_size[2,]
+
+# leaving row blank (i.e. only having the column indicator) returns all rows for first column
+fish_size[,1]
+```
+
+## Lists
+
+Reminder: A list combines vectors that can be of different length and type
+
+```{r}
+urchins <- list("blue", c(1, 2, 3), c("a cat", "a dog"), 5L)
+urchins
+
+# using single bracket keeps the class of list, and the double bracket makes the class character
+ex_1 <- urchins[3]
+ex_2 <- urchins[[3]]
+class(ex_1)
+class(ex_2)
+ex_1[1]
+ex_2[1]
+```
+
+## Make a named list
+
+```{r}
+tacos <- list(topping = c("onion", "cilantro", "guacamole"),
+              filling = c("beans", "meat", "veggies"),
+              price = c(6.75, 8.25, 9.50))
+
+tacos
+
+# Index list elements by name
+tacos$filling
+
+# readr package parsenumber -> only pull out number piece
+
+# return second value of the fillings vector
+tacos$filling[2]
+
+```
+
+```{r}
+a <- c(1,2,3)
+b <- c(3,4,5)
+
+# Run t-test
+my_ttest <- t.test(a,b)
+my_ttest
+class(my_ttest)
+my_ttest$p.value
+```
+
+The price of a veggie burrito with guacamole is 'r tacos\$price\[2\]'
+
+In r markdown add information in text in a way that's reproducible.
+
+'r my_list\$dogs\[2\]'
+
+## Data frames
+
+3 ways to create a data frame
+
+```{r}
+# Create 3 separate vectors and then combine them into a data frame using data.frame function
+# vectors in data frome need to have the same length
+topping <- c("onion", "cilantro", "guacamole")
+filling <- c("beans", "meat", "veggies")
+price <- c(6.75, 8.25, 9.50)
+
+df_ex_1 <- data.frame(topping, filling, price)
+class(df_ex_1)
+
+# combine all commands into single function
+df_ex_2 <- data.frame(topping = c("sour cream", "salsa", "cheese"),
+                      filling = c("chicken", "cheese", "cabbage"),
+                      price = c(12.50, 13.75, 15.00))
+
+# make data frome/tibble, use the tidyverse package, a way to write it out how it will look in the data frame
+df_ex_3 <- tribble(
+  ~topping, ~filling, ~price,
+  "avocado", "steak", 13.25,
+  "radish", "fish", 10.40,
+  "salsa", "veggies", 9.75
+)
+
+class(df_ex_3)
+
+df_ex_3
+
+df_ex_3$price[3]
+```
+
+Because a data frame is a list allows us to have different classes for each column
